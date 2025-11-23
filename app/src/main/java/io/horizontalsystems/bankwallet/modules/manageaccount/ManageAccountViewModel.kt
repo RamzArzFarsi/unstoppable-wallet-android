@@ -28,7 +28,7 @@ class ManageAccountViewModel(
             newName = account.name,
             canSave = false,
             closeScreen = false,
-            headerNote = account.headerNote(false),
+            headerNote = account.headerNote(),
             keyActions = getKeyActions(account),
             backupActions = getBackupItems(account),
         )
@@ -121,6 +121,7 @@ class ManageAccountViewModel(
                     listOf(KeyAction.PrivateKeys, KeyAction.PublicKeys)
                 }
             }
+            is AccountType.MoneroWatchAccount -> listOf()
         }
     }
 

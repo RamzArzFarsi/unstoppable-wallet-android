@@ -58,11 +58,12 @@ import io.horizontalsystems.bankwallet.ui.compose.components.HsImage
 import io.horizontalsystems.bankwallet.ui.compose.components.ListEmptyView
 import io.horizontalsystems.bankwallet.ui.compose.components.MenuItem
 import io.horizontalsystems.bankwallet.ui.compose.components.RowUniversal
-import io.horizontalsystems.bankwallet.ui.compose.components.ScrollableTabs
-import io.horizontalsystems.bankwallet.ui.compose.components.TabItem
 import io.horizontalsystems.bankwallet.ui.compose.components.body_leah
 import io.horizontalsystems.bankwallet.ui.compose.components.subhead2_grey
 import io.horizontalsystems.bankwallet.ui.compose.components.title3_leah
+import io.horizontalsystems.bankwallet.uiv3.components.tabs.TabItem
+import io.horizontalsystems.bankwallet.uiv3.components.tabs.TabsTop
+import io.horizontalsystems.bankwallet.uiv3.components.tabs.TabsTopType
 
 @Composable
 fun TransactionsScreen(
@@ -343,7 +344,7 @@ fun TransactionCell(item: TransactionViewItem, onClick: () -> Unit) {
                     Spacer(Modifier.weight(1f))
                     item.primaryValue?.let { coloredValue ->
                         Text(
-                            text = if (item.showAmount) coloredValue.value else "*****",
+                            text = if (item.showAmount) coloredValue.value else "* * *",
                             style = ComposeAppTheme.typography.body,
                             color = coloredValue.color.compose(),
                             overflow = TextOverflow.Ellipsis,
@@ -384,7 +385,7 @@ fun TransactionCell(item: TransactionViewItem, onClick: () -> Unit) {
                     )
                     item.secondaryValue?.let { coloredValue ->
                         Text(
-                            text = if (item.showAmount) coloredValue.value else "*****",
+                            text = if (item.showAmount) coloredValue.value else "",
                             style = ComposeAppTheme.typography.subheadR,
                             color = coloredValue.color.compose(),
                             maxLines = 1,
@@ -406,7 +407,7 @@ private fun FilterTypeTabs(
         TabItem(stringResource(it.item.title), it.selected, it.item)
     }
 
-    ScrollableTabs(tabItems) { transactionType ->
+    TabsTop(TabsTopType.Scrolled, tabItems) { transactionType ->
         onTransactionTypeClick.invoke(transactionType)
     }
 }
